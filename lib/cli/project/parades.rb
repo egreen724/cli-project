@@ -9,17 +9,10 @@ class Parade
     @date = date
     @time = time
     @neighborhood = neighborhood
-    
+    @@all << self 
   end
   
-  def display_by_date(date)
-    puts "Please enter the date that you would like to attend a parade (MM/DD/YYYY):"
-    
-    date_input = gets.strip  
-    
-  end
-  
-  def Self.display_all
+  def Self.all
     @@all 
   end
   

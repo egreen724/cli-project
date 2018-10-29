@@ -12,16 +12,31 @@ class CLI
     input = gets.strip.to_s 
     
     if input == "full schedule"
-      #method for list of parades (Parades.display_all)
+      list_parades
       elsif input == "by date"
-        #method to search and find by date
+        #list dates; method to search and find by date
       elsif input == "by neighborhood"
         neighborhood_input = gets.strip 
-        #method to find and display by neighborhood 
+        #list neighborhoods; method to find and display by neighborhood 
       else
        puts "Please enter a valid option." 
        call 
      end
+  end
+  
+  def list_parades 
+    parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
+    
+    parade_list.each_with_index do |parade, index|
+      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.date} - #{parade.time}"
+    end
+  end
+  
+   def find_and_display_by_date(date)
+    puts "Please enter the date that you would like to attend a parade (MM/DD/YYYY):"
+    
+    date_input = gets.strip  
+    
   end
   
 end
