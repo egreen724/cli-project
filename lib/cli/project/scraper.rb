@@ -6,4 +6,10 @@ require 'nokogiri'
 
 class Scraper
   
+  def Self.scrape_schedule_page(schedule_url)
+    schedule = Nokogiri::HTML(open(schedule_url))
+    
+    
+  end
+  
 end
