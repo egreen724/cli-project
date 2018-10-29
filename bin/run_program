@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/cli/environment'
-
+require_relative '../lib/cli/project/cli'
 
 CLI.new.call 
