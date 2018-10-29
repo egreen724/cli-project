@@ -13,7 +13,9 @@ class Parades
   end
   
   def display_by_date(date)
-    date = gets.strip 
+    puts "Please enter the date that you would like to attend a parade (MM/DD/YYYY):"
+    
+    date_input = gets.strip  
     
   end
   
