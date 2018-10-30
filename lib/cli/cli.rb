@@ -9,7 +9,7 @@ class CLI
   end
   
   def menu  
-    puts "Would you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)?"
+    puts "Would you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
     
     input = gets.strip.to_s 
     
@@ -17,9 +17,10 @@ class CLI
     when "full schedule"
       list_parades
     when "by date"
+      find_and_display_by_date
         #list dates; method to search and find by date
     when "by neighborhood"
-        neighborhood_input = gets.strip 
+        find_and_display_by_neighborhood 
         #list neighborhoods; method to find and display by neighborhood 
     when "exit"
       exit_method
@@ -30,7 +31,7 @@ class CLI
   end
   
   def exit_method 
-    puts "Thank you for exploring the Mardi Gras parade schedule for 2019!"
+    puts "Thank you for exploring the Mardi Gras Parade schedule for 2019! Laissez les bons temps rouler!"
   end 
   
   def list_parades 
@@ -41,16 +42,15 @@ class CLI
     end
   end
   
-   def find_and_display_by_date(date)
-    puts "Please enter the date that you would like to attend a parade (MM/DD/YYYY):"
-    date_input = gets.strip  
+   def find_and_display_by_neighborhood
+    puts "Please enter the neighborhood where you would like to see a parade:"
+    neighborhood_input = gets.strip  
     
-    if neighborhood = Neighborhood.find_by_name(input)
+    if neighborhood_input = Neighborhood.find_by_name(neighborhood_input)
       neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
         puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
        end 
       end 
     end
 
-  
 end

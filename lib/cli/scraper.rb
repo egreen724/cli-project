@@ -25,20 +25,19 @@ class Scraper
       new_parade = Parade.new 
       new_parade.title = parade.split(" - ")[0]
       new_parade.time = parade.split(" - ")[1]
-      binding.pry 
     end
     
+    #Come back to this! Not scraping the right around)
     schedule.css("div.pageSchedule").each do |block|
       block.css("ul.parades").each do |parade|
         neighborhood = parade.css("li.listing-location").text 
-        binding.pry
       end
     end 
       
+      #Not scraping the correct info 
       schedule.css("div.dates-wrapper").each do |date|
          date = date.css("div.dates").text 
       end 
-      binding.pry 
       
   end
 end
