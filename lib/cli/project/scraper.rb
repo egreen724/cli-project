@@ -14,9 +14,8 @@ class Scraper
     
     schedule.css("ul.parades").each do |block|
       block.css("li.clickable").each do |parade|
-        title = parade.css("span.parade a").text 
-        neighborhood = parade.css("li.listing-location").text 
-        time = parade.css("span.time").text 
+        parade_data = "#{parade.css("span.parade a").text} - #{parade.css("span.time").text} -  #{parade.css("li.listing-location").text}"
+       parades << parade_data 
       end
     end 
     
