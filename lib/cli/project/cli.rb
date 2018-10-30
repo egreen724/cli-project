@@ -1,12 +1,17 @@
 
-class CLI 
+class Project::CLI 
   
-  def initialize
+  def call
+    welcome 
+    menu
+    
+  end
+  
+  def welcome 
      puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
   end
   
-  def call 
-   
+  def menu  
     puts "Would you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)?"
     
     input = gets.strip.to_s 
@@ -19,11 +24,17 @@ class CLI
     when "by neighborhood"
         neighborhood_input = gets.strip 
         #list neighborhoods; method to find and display by neighborhood 
+    when "exit"
+      exit_method
     else
        puts "Please enter a valid option." 
-       call 
+       menu 
      end
   end
+  
+  def exit_method 
+    puts "Thank you for exploring the Mardi Gras parade schedule for 2019!"
+  end 
   
   def list_parades 
     parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
