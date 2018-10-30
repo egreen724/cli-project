@@ -1,4 +1,4 @@
-class Project::Neighborhood
+class CLI::Neighborhood
   
   attr_accessor = :name, :parades 
   

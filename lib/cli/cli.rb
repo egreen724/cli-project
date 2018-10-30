@@ -1,14 +1,11 @@
-
-class Project::CLI 
+class CLI 
   
-  def call
-    welcome 
-    menu
-    
+  def initialize  
+     puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
   end
   
-  def welcome 
-     puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
+  def call
+    menu
   end
   
   def menu  

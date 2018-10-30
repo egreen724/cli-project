@@ -4,7 +4,7 @@ require 'nokogiri'
 
 #Scraping data from http://www.mardigrasneworleans.com/schedule.html
 
-class Scraper
+class CLI::Scraper
   
   attr_accessor :parade, :neighborhood
   
