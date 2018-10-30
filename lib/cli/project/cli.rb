@@ -11,14 +11,15 @@ class CLI
     
     input = gets.strip.to_s 
     
-    if input == "full schedule"
+    case input 
+    when "full schedule"
       list_parades
-      elsif input == "by date"
+    when "by date"
         #list dates; method to search and find by date
-      elsif input == "by neighborhood"
+    when "by neighborhood"
         neighborhood_input = gets.strip 
         #list neighborhoods; method to find and display by neighborhood 
-      else
+    else
        puts "Please enter a valid option." 
        call 
      end
