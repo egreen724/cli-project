@@ -14,10 +14,16 @@ class Scraper
     
     schedule.css("ul.parades").each do |block|
       block.css("li.clickable").each do |parade|
-        parade_data = "#{parade.css("span.parade a").text} - #{parade.css("span.time").text} -  #{parade.css("li.listing-location").text}"
-       parades << parade_data 
+        @parade_data = "#{parade.css("span.parade a").text} - #{parade.css("span.time").text} -  #{parade.css("li.listing-location").text}"
+       parades << @parade_data 
       end
     end 
+    
+    parades.each do |parade|
+      Parade.new.title = parade.split[0]
+      Parade.new.time = parade.split[1]
+      Parade.new.neighborhood = parade.split[2]
+    end
     
     schedule.css("div.pageSchedule").each do |block|
       block.css("ul.parades").each do |parade|
