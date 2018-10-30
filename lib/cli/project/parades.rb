@@ -4,7 +4,7 @@ class Parade
   
   @@all = []
   
-  def initialize(title, date, time, neighborhood)
+  def initialize
     @title = title
     @date = date
     @time = time
