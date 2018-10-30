@@ -1,4 +1,4 @@
-class Parade
+class Project::Parade
   
   attr_accessor :title, :date, :time, :neighborhood
   

@@ -1,4 +1,4 @@
-class Neighborhood
+class Project::Neighborhood
   
   attr_accessor = :name, :parades 
   

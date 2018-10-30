@@ -22,8 +22,9 @@ class Scraper
     end 
     
     parades.each do |parade|
-      Parade.new.title = parade.split[0]
-      Parade.new.time = parade.split[1]
+      new_parade = Parade.new 
+      new_parade.title = parade.split[0]
+      new_parade.time = parade.split[1]
       binding.pry 
     end
     
