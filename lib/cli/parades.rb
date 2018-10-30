@@ -1,4 +1,4 @@
-class CLI::Parade
+class Parade
   
   attr_accessor :title, :date, :time, :neighborhood
   
@@ -12,7 +12,7 @@ class CLI::Parade
     @@all << self 
   end
   
-  def Self.all
+  def self.all
     @@all 
   end
   

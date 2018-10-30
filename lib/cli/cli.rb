@@ -46,10 +46,11 @@ class CLI
     date_input = gets.strip  
     
     if neighborhood = Neighborhood.find_by_name(input)
-      neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index |parade, index|
-      puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
-    end 
-  end
-end
+      neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
+        puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+       end 
+      end 
+    end
+
   
 end

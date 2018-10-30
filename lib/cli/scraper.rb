@@ -4,7 +4,7 @@ require 'nokogiri'
 
 #Scraping data from http://www.mardigrasneworleans.com/schedule.html
 
-class CLI::Scraper
+class Scraper
   
   attr_accessor :parade, :neighborhood
   
@@ -23,8 +23,8 @@ class CLI::Scraper
     
     parades.each do |parade|
       new_parade = Parade.new 
-      new_parade.title = parade.split[0]
-      new_parade.time = parade.split[1]
+      new_parade.title = parade.split(" - ")[0]
+      new_parade.time = parade.split(" - ")[1]
       binding.pry 
     end
     
