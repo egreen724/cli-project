@@ -1,6 +1,6 @@
 class Parade
   
-  attr_accessor :title, :date, :time, :neighborhood
+  attr_accessor :title, :date, :time, :neighborhood, :history 
   
   @@all = []
   
@@ -9,6 +9,7 @@ class Parade
     @date = date
     @time = time
     @neighborhood = neighborhood
+    @history = history 
     @@all << self 
   end
   

@@ -16,6 +16,7 @@ class CLI
     case input 
     when "full schedule"
       list_parades
+      parade_detail
     when "by date"
       find_and_display_by_date
         #list dates; method to search and find by date
@@ -33,13 +34,22 @@ class CLI
   def exit_method 
     puts "Thank you for exploring the Mardi Gras Parade schedule for 2019! Laissez les bons temps rouler!"
   end 
-  
-  def list_parades 
-    parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
     
-    parade_list.each_with_index do |parade, index|
+  def list_parades 
+    @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
+    
+    @parade_list.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.date} - #{parade.time}"
     end
+  end
+  
+  def parade_detail
+    puts "Enter the parade number to see the full history."
+    number_input = gets.strip.to_i 
+    
+    @parade_list.all.sort{|a, b| a.date <=> b.date}
+    
+    @parade_list[number_input - 1].history   
   end
   
    def find_and_display_by_neighborhood
@@ -47,6 +57,7 @@ class CLI
     neighborhood_input = gets.strip  
     
     if neighborhood_input = Neighborhood.find_by_name(neighborhood_input)
+      puts "#{neighborhood_input}" 
       neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
         puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
        end 

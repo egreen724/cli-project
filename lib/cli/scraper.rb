@@ -38,7 +38,14 @@ class Scraper
       schedule.css("div.dates-wrapper").each do |date|
          date = date.css("div.dates").text 
       end 
-      
+  end
+  
+  
+  #css("div.pageRoute p").text history paragraph 
+  #page-url css("span.parade a").attribute("href").value
+  
+  def scrape_history_page(url)
+    
   end
 end
 
