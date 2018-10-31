@@ -1,22 +1,26 @@
 class CLI 
   
   def initialize  
-    make_parades
-    make_parade_details
     puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
   end
   
   def make_parades 
-    Scraper.new.scrape_schedule_page("http://www.mardigrasneworleans.com/schedule.html")
+    new_scrape = Scraper.new
+    new_scrape.scrape_schedule_page("http://www.mardigrasneworleans.com/schedule.html")
   end
   
   def make_parade_details
+    url_list = Parade.all.collect {|parade| parade.url}
     
-    
-    Scraper.new.scrape_history_page("http://www.mardigrasneworleans.com/schedule/parade-info/parades-joan-of-arc.html")
+    url_list.each do |page_url|
+    new_scrape = Scraper.new
+    new_scrape.scrape_history_page(page_url)
+    end
   end
   
   def call
+    make_parades
+    make_parade_details
     menu
   end
   
@@ -71,7 +75,7 @@ class CLI
     
     if neighborhood_input = Neighborhood.find_by_name(neighborhood_input)
       puts "#{neighborhood_input}" 
-      neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
+      neighborhood.parades.sort{|a, b| a.title <=> b.title}.each_with_index do |parade, index|
         puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
        end 
       end 

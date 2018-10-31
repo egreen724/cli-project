@@ -25,11 +25,9 @@ class Scraper
       new_parade = Parade.new 
       new_parade.title = parade.split(" - ")[0]
       new_parade.time = parade.split(" - ")[1]
-      new_parade.url = "http://http://www.mardigrasneworleans.com" + parade.split(" - ")[2]
+      new_parade.url = "http://www.mardigrasneworleans.com" + parade.split(" - ")[2]
     end
   end
- 
-  #page-url css("span.parade a").attribute("href").value
   
   def scrape_history_page(url)
     detail_page = Nokogiri::HTML(open(url))
