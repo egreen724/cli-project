@@ -33,6 +33,8 @@ class CLI
     when "full schedule"
       list_parades
       parade_detail
+      puts "\n"
+      menu 
     when "by date"
       find_and_display_by_date
         #list dates; method to search and find by date
@@ -60,13 +62,13 @@ class CLI
   end
   
   def parade_detail
-    puts "Enter the parade number to see more details."
+    puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
     
     #@parade_list.all.sort{|a, b| a.title <=> b.title}
     
     puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
-    puts "#{@parade_list[number_input - 1].history}"
+    puts "\n #{@parade_list[number_input - 1].history}"
   end
   
    def find_and_display_by_neighborhood
