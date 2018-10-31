@@ -38,8 +38,11 @@ class Scraper
     
     detail_page.css("div #content").each do |parade|
       current_parade.history = parade.css("div.pageRoute p").text
-      current_parade.date = parade.css("div.purpleBar span.pTime").text 
-      current_parade.neighborhood = parade.css("div.purpleBar span[@itemprop = 'name']").text 
+      current_parade.date = parade.css("div.purpleBar span.pTime").text.split(" ", 2)[1]
+      current_parade.day = parade.css("div.purpleBar span.pTime").text.split(" ", 2)[0]
+      current_parade.neighborhood = parade.css("div.purpleBar span[@itemprop = 'name']").text
+      
+      #parade.css("div.purpleBar time").attribute("datetime").value provides datetime datapoint  
     end
     
   end

@@ -1,12 +1,13 @@
 class Parade
   
-  attr_accessor :title, :date, :time, :neighborhood, :history, :url
+  attr_accessor :title, :date, :day, :time, :neighborhood, :history, :url
   
   @@all = []
   
   def initialize
     @title = title
     @date = date
+    @day = day 
     @time = time
     @neighborhood = neighborhood
     @history = history 

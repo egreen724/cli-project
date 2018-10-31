@@ -54,10 +54,10 @@ class CLI
   end 
     
   def list_parades 
-    @parade_list = Parade.all.sort{|a, b| a.title <=> b.title} 
+    @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
     
     @parade_list.each_with_index do |parade, index|
-      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.date} - #{parade.time}"
+      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.day}, #{parade.date} - #{parade.time}"
     end
   end
   
@@ -77,8 +77,8 @@ class CLI
     
     if neighborhood_input = Neighborhood.find_by_name(neighborhood_input)
       puts "#{neighborhood_input}" 
-      neighborhood.parades.sort{|a, b| a.title <=> b.title}.each_with_index do |parade, index|
-        puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+      neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
+        puts "#{index + 1}. #{parade.title} - #{parade.day}, #{parade.date} - #{parade.time}"
        end 
       end 
     end
