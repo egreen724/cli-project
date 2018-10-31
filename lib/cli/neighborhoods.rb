@@ -1,3 +1,5 @@
+require 'pry'
+
 class Neighborhood
   
   attr_accessor = :name, :parades 
@@ -7,11 +9,11 @@ class Neighborhood
   def initialize(name)
     @name = name 
     @parades = []
+    @@all << self 
   end
   
   def self.all
-    @@all 
-    binding.pry 
+    @@all
   end
   
   def self.find_by_name(name)
