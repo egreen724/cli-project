@@ -45,8 +45,21 @@ class Scraper
   #page-url css("span.parade a").attribute("href").value
   
   def scrape_history_page(url)
+    detail_page = Nokogiri::HTML(open(url))
+    
+    parade_name = detail_page.css("div #yellow_bar h1.routeH1 span #foobar").text 
+    
+    current_parade = Parade.find_by_name(parade_name)
+    
+    detail_page.css("div #content").each do |parade|
+      binding.pry 
+      current_parade.history = parade.css("div.pageRoute p").text
+      current_parade.date = parade.css("div.purpleBar span.pTime").text 
+      current_parade.neighborhood = parade.css("div.purpleBar span").attribute("itemprop").text 
+    end
     
   end
 end
 
 Scraper.new.scrape_schedule_page("http://www.mardigrasneworleans.com/schedule.html")
+Scraper.new.scrape_history_page("http://www.mardigrasneworleans.com/schedule/parade-info/parades-joan-of-arc.html")

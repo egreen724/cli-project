@@ -17,4 +17,8 @@ class Parade
     @@all 
   end
   
+   def self.find_by_name(name)
+    self.all.find {|x| x.name == name}
+  end
+  
 end
