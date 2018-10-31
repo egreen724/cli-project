@@ -27,17 +27,17 @@ class Scraper
       new_parade.time = parade.split(" - ")[1]
     end
     
-    #Come back to this! Not scraping the right around)
-    schedule.css("div.pageSchedule").each do |block|
-      block.css("ul.parades").each do |parade|
-        neighborhood = parade.css("li.listing-location").text 
-      end
-    end 
+    # #Come back to this! Not scraping the right around)
+    # schedule.css("div.pageSchedule").each do |block|
+    #   block.css("ul.parades").each do |parade|
+    #     neighborhood = parade.css("li.listing-location").text 
+    #   end
+    # end 
       
-      #Not scraping the correct info 
-      schedule.css("div.dates-wrapper").each do |date|
-         date = date.css("div.dates").text 
-      end 
+    #   #Not scraping the correct info 
+    #   schedule.css("div.dates-wrapper").each do |date|
+    #     date = date.css("div.dates").text 
+    #   end 
   end
   
   
@@ -52,7 +52,6 @@ class Scraper
     current_parade = Parade.find_by_title(parade_title)
     
     detail_page.css("div #content").each do |parade|
-      binding.pry 
       current_parade.history = parade.css("div.pageRoute p").text
       current_parade.date = parade.css("div.purpleBar span.pTime").text 
       current_parade.neighborhood = parade.css("div.purpleBar span[@itemprop = 'name']").text 

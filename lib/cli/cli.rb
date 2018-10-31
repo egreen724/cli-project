@@ -36,7 +36,7 @@ class CLI
   end 
     
   def list_parades 
-    @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
+    @parade_list = Parade.all.sort{|a, b| a.title <=> b.title} 
     
     @parade_list.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.date} - #{parade.time}"
@@ -44,12 +44,13 @@ class CLI
   end
   
   def parade_detail
-    puts "Enter the parade number to see the full history."
+    puts "Enter the parade number to see more details."
     number_input = gets.strip.to_i 
     
-    @parade_list.all.sort{|a, b| a.date <=> b.date}
+    #@parade_list.all.sort{|a, b| a.title <=> b.title}
     
-    @parade_list[number_input - 1].history   
+    puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
+    puts "#{@parade_list[number_input - 1].history}"
   end
   
    def find_and_display_by_neighborhood
