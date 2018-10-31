@@ -37,10 +37,14 @@ class CLI
       menu 
     when "by date"
       find_and_display_by_date
+      puts "\n"
+      menu 
         #list dates; method to search and find by date
     when "by neighborhood"
-        find_and_display_by_neighborhood 
-        #list neighborhoods; method to find and display by neighborhood 
+      list_neighborhoods
+      display_parades_by_neighborhood 
+      puts "\n"
+      menu 
     when "exit"
       exit_method
     else
@@ -61,29 +65,40 @@ class CLI
     end
   end
   
+  
   def parade_detail
     puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
-    
-    #@parade_list.all.sort{|a, b| a.title <=> b.title}
     
     puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
     puts "\n #{@parade_list[number_input - 1].history}"
   end
   
-   def find_and_display_by_neighborhood
-    puts "Please enter the neighborhood where you would like to see a parade:"
-    neighborhood_input = gets.strip  
+  def list_neighborhoods
     
-    if neighborhood_input == Neighborhood.find_by_name(neighborhood_input)
-      puts "#{neighborhood_input}" 
+    neighborhood_list = Neighborhood.all.sort {|a, b| a.name <=> b.name}
 
-      neighborhood_list = neighborhood.parades.sort{|a, b| a.date <=> b.date}
+    neighborhood_list.each_with_index do |n, index|
+      puts "#{index + 1}. #{n.name}"
+    end 
+  end
+  
+   def display_parades_by_neighborhood
+    puts "Please enter the neighborhood number to see a list of parades."
+    neighborhood_input = gets.strip.to_i   
+    
+    # if Neighborhood.find_by_name(neighborhood_input) == neighborhood_input 
+    #   binding.pry 
+    #   current_neighborhood = Neighborhood.find_by_name(neighborhood_input)
+    #   neighborhood_list = current_neighborhood.parades.sort{|a, b| a.date <=> b.date}
       
-      neighborhood_list.each_with_index do |parade, index|
-        puts "#{index + 1}. #{parade.title} - #{parade.day}, #{parade.date} - #{parade.time}"
-       end 
-      end 
+    #   neighborhood_list.each_with_index do |parade, index|
+    #     puts "#{index + 1}. #{parade.title} - #{parade.day}, #{parade.date} - #{parade.time}"
+    #     binding.pry 
+    #   end 
+    # else 
+    #   puts "Please enter an accurate name."
+    #   end 
     end
 
 end

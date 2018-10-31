@@ -15,15 +15,25 @@ class Neighborhood
   def add_parade(parade)
     parade.neighborhood = self.name  
     @parades << parade
-    binding.pry 
   end
   
   def self.all
-    @@all
+    neighborhoods = @@all.collect.uniq 
+    neighborhoods
+    binding.pry 
   end
   
   def self.find_by_name(name)
     self.all.find {|x| x.name == name}
   end
+  
+  # def self.find_or_create_by_name(name)
+  #   if 
+  #     self.find_by_name(name) == nil 
+  #     self.create(name)
+  #   else 
+  #   self.find_by_name(name)
+  #   end
+  # end
   
 end

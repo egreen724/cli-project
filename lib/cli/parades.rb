@@ -23,11 +23,6 @@ class Parade
     self.all.find {|x| x.title == title}
   end
   
-  def neighborhood_name 
-   self.neighborhood.name if self.neighborhood 
-   binding.pry 
-  end
-  
   def neighborhood=(neighborhood)
     @neighborhood = neighborhood 
     
@@ -35,7 +30,7 @@ class Parade
      neighborhood.add_parade(self)
     else 
       new_neighborhood = Neighborhood.new(neighborhood)
-      new_neighborhood.add_parade(self) 
+      new_neighborhood.parades << self 
     end 
   end
   
