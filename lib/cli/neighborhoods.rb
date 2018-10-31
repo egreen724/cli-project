@@ -9,7 +9,8 @@ class Neighborhood
   def initialize(name)
     @name = name 
     @parades = []
-    @@all << self 
+    
+    @@all << self unless @@all.include?(self)
   end
   
   def add_parade(parade)
@@ -18,9 +19,7 @@ class Neighborhood
   end
   
   def self.all
-    neighborhoods = @@all.collect.uniq 
-    neighborhoods
-    binding.pry 
+    @@all 
   end
   
   def self.find_by_name(name)

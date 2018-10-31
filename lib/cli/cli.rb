@@ -76,9 +76,9 @@ class CLI
   
   def list_neighborhoods
     
-    neighborhood_list = Neighborhood.all.sort {|a, b| a.name <=> b.name}
+    @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
 
-    neighborhood_list.each_with_index do |n, index|
+    @neighborhood_list.each_with_index do |n, index|
       puts "#{index + 1}. #{n.name}"
     end 
   end
@@ -86,6 +86,14 @@ class CLI
    def display_parades_by_neighborhood
     puts "Please enter the neighborhood number to see a list of parades."
     neighborhood_input = gets.strip.to_i   
+    
+    current_neighborhood = @neighborhood_list[neighborhood_input - 1]
+    
+    puts "#{current_neighborhood.name}\n"
+    
+    current_neighborhood.parades.each_with_index do |parade, index|
+    puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+      end 
     
     # if Neighborhood.find_by_name(neighborhood_input) == neighborhood_input 
     #   binding.pry 
