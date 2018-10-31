@@ -1,4 +1,4 @@
-class CLI::Neighborhood
+class Neighborhood
   
   attr_accessor = :name, :parades 
   
@@ -11,6 +11,7 @@ class CLI::Neighborhood
   
   def self.all
     @@all 
+    binding.pry 
   end
   
   def self.find_by_name(name)

@@ -1,7 +1,19 @@
 class CLI 
   
   def initialize  
-     puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
+    make_parades
+    make_parade_details
+    puts "Welcome to Mardi Gras 2019! Please use the choices below for more information about the parade schedule and events."
+  end
+  
+  def make_parades 
+    Scraper.new.scrape_schedule_page("http://www.mardigrasneworleans.com/schedule.html")
+  end
+  
+  def make_parade_details
+    
+    
+    Scraper.new.scrape_history_page("http://www.mardigrasneworleans.com/schedule/parade-info/parades-joan-of-arc.html")
   end
   
   def call
