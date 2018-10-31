@@ -47,15 +47,15 @@ class Scraper
   def scrape_history_page(url)
     detail_page = Nokogiri::HTML(open(url))
     
-    parade_name = detail_page.css("div #yellow_bar h1.routeH1 span #foobar").text 
+    parade_title = detail_page.css("span#foobar").text 
     
-    current_parade = Parade.find_by_name(parade_name)
+    current_parade = Parade.find_by_title(parade_title)
     
     detail_page.css("div #content").each do |parade|
       binding.pry 
       current_parade.history = parade.css("div.pageRoute p").text
       current_parade.date = parade.css("div.purpleBar span.pTime").text 
-      current_parade.neighborhood = parade.css("div.purpleBar span").attribute("itemprop").text 
+      current_parade.neighborhood = parade.css("div.purpleBar span[@itemprop = 'name']").text 
     end
     
   end
