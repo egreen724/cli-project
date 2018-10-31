@@ -23,15 +23,20 @@ class Parade
     self.all.find {|x| x.title == title}
   end
   
-  def neighborhood=(neighborhood)
-    @neighborhood = neighborhood 
-    if Neighborhood.find_by_name(neighborhood) == true
-      self.neighborhood = neighborhood
-    else 
-    neighborhood = Neighborhood.new(neighborhood)
-    end 
-    neighborhood.parades << self 
+  def neighborhood_name 
+   self.neighborhood.name if self.neighborhood 
+   binding.pry 
   end
   
+  def neighborhood=(neighborhood)
+    @neighborhood = neighborhood 
+    
+    if Neighborhood.all.include?(neighborhood)
+     neighborhood.add_parade(self)
+    else 
+      new_neighborhood = Neighborhood.new(neighborhood)
+      new_neighborhood.add_parade(self) 
+    end 
+  end
   
 end

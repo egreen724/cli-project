@@ -48,6 +48,3 @@ class Scraper
     
   end
 end
-
-#Scraper.new.scrape_schedule_page("http://www.mardigrasneworleans.com/schedule.html")
-#Scraper.new.scrape_history_page("http://www.mardigrasneworleans.com/schedule/parade-info/parades-joan-of-arc.html")

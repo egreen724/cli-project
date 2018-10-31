@@ -2,7 +2,7 @@ require 'pry'
 
 class Neighborhood
   
-  attr_accessor = :name, :parades 
+  attr_accessor :name, :parades 
   
   @@all = []
   
@@ -10,6 +10,12 @@ class Neighborhood
     @name = name 
     @parades = []
     @@all << self 
+  end
+  
+  def add_parade(parade)
+    parade.neighborhood = self.name  
+    @parades << parade
+    binding.pry 
   end
   
   def self.all

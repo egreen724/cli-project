@@ -75,9 +75,12 @@ class CLI
     puts "Please enter the neighborhood where you would like to see a parade:"
     neighborhood_input = gets.strip  
     
-    if neighborhood_input = Neighborhood.find_by_name(neighborhood_input)
+    if neighborhood_input == Neighborhood.find_by_name(neighborhood_input)
       puts "#{neighborhood_input}" 
-      neighborhood.parades.sort{|a, b| a.date <=> b.date}.each_with_index do |parade, index|
+
+      neighborhood_list = neighborhood.parades.sort{|a, b| a.date <=> b.date}
+      
+      neighborhood_list.each_with_index do |parade, index|
         puts "#{index + 1}. #{parade.title} - #{parade.day}, #{parade.date} - #{parade.time}"
        end 
       end 
