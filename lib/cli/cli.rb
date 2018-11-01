@@ -25,7 +25,7 @@ class CLI
   end
   
   def menu  
-    puts "Would you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
+    puts "Main Menu: \nWould you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
     
     input = gets.strip.to_s 
     
@@ -43,6 +43,7 @@ class CLI
     when "by neighborhood"
       list_neighborhoods
       display_parades_by_neighborhood 
+      parade_detail_by_n
       puts "\n"
       menu 
     when "exit"
@@ -69,29 +70,42 @@ class CLI
     puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
     
-    puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
-    puts "\n #{@parade_list[number_input - 1].history}"
+    if number_input <= (@parade_list.length + 1)
+    
+      puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
+      puts "#{@parade_list[number_input - 1].history}"
+    else 
+     puts "Please enter a valid number."
+   end 
   end
   
   def display_by_date
     puts "What date would you like to attend a parade? (range: Jan 06 - Mar 05)"
     date_input = gets.strip
     
-    puts "#{date_input}\n"
-    
-    @date_list = Parade.all.find_all {|p| p.date == date_input}
-    
-    @date_list.each_with_index do |parade, index|
-    puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
-    end 
+    if Parade.all.any? {|p| p.date == date_input}
+      puts "#{date_input}\n"
+      
+      @date_list = Parade.all.find_all {|p| p.date == date_input}
+      
+      @date_list.each_with_index do |parade, index|
+      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
+      end
+    else 
+      puts "Please enter a valid date in the following format: Mon DD (ex. Jan 06)\n"
+      menu 
   end
   
   def parade_detail_by_date
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i 
     
-    puts "\n#{@date_list[number_input - 1].title}, #{@date_list[number_input - 1].date}, #{@date_list[number_input - 1].time}, #{@date_list[number_input - 1].neighborhood}"
-    puts "\n#{@date_list[number_input - 1].history}"
+    if number_input <= (@date_list.length + 1)
+      puts "\n#{@date_list[number_input - 1].title}, #{@date_list[number_input - 1].date}, #{@date_list[number_input - 1].time}, #{@date_list[number_input - 1].neighborhood}"
+      puts "#{@date_list[number_input - 1].history}"
+    else 
+      puts "Please enter a valid number."
+    end 
   end
   
   def list_neighborhoods
@@ -109,12 +123,23 @@ class CLI
     
     puts "#{current_neighborhood.name}\n"
     
-    parade_list = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
+    @parade_list_by_n = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
     
-    parade_list.each_with_index do |parade, index|
+    @parade_list_by_n.each_with_index do |parade, index|
      puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+      end 
     end 
   end 
+  
+  def parade_detail_by_n
+    puts "\nEnter the parade number to see more details."
+    number_input = gets.strip.to_i 
+    
+    puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood}"
+    puts "\n#{@parade_list_by_n[number_input - 1].history}"
+  end
+  
+  
     # current_neighborhood.parades.each_with_index do |parade, index|
     # puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
      # end 
