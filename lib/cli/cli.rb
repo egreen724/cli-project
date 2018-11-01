@@ -49,7 +49,7 @@ class CLI
     when "exit"
       exit_method
     else
-       puts "Please enter a valid option." 
+       puts "Please enter a valid option.\n" 
        menu 
      end
   end
@@ -76,6 +76,7 @@ class CLI
       puts "#{@parade_list[number_input - 1].history}"
     else 
      puts "Please enter a valid number."
+     parade_detail
    end 
   end
   
@@ -93,7 +94,8 @@ class CLI
       end
     else 
       puts "Please enter a valid date in the following format: Mon DD (ex. Jan 06)\n"
-      menu 
+      display_by_date
+    end 
   end
   
   def parade_detail_by_date
@@ -105,6 +107,7 @@ class CLI
       puts "#{@date_list[number_input - 1].history}"
     else 
       puts "Please enter a valid number."
+      parade_detail_by_date
     end 
   end
   
@@ -119,24 +122,33 @@ class CLI
     puts "Please enter the neighborhood number to see a list of parades."
     neighborhood_input = gets.strip.to_i   
     
-    current_neighborhood = @neighborhood_list[neighborhood_input - 1]
-    
-    puts "#{current_neighborhood.name}\n"
-    
-    @parade_list_by_n = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
-    
-    @parade_list_by_n.each_with_index do |parade, index|
-     puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
-      end 
+    if neighborhood_input <= (@neighborhood_list.length + 1)
+      current_neighborhood = @neighborhood_list[neighborhood_input - 1]
+      
+      #puts "#{current_neighborhood.name}\n"
+      
+      @parade_list_by_n = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
+      
+      @parade_list_by_n.each_with_index do |parade, index|
+       puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+        end 
+    else 
+      puts "Please enter a valid number."
+      display_parades_by_neighborhood
     end 
   end 
   
   def parade_detail_by_n
     puts "\nEnter the parade number to see more details."
-    number_input = gets.strip.to_i 
+    number_input = gets.strip.to_i
     
-    puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood}"
-    puts "\n#{@parade_list_by_n[number_input - 1].history}"
+    if number_input <= (@parade_list_by_n.length + 1)
+      puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood}"
+      puts "\n#{@parade_list_by_n[number_input - 1].history}"
+    else
+      puts "Please enter a valid number."
+      parade_detail_by_n
+    end 
   end
   
   
