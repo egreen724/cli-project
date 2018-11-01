@@ -36,10 +36,9 @@ class CLI
       puts "\n"
       menu 
     when "by date"
-      find_and_display_by_date
+      display_by_date
       puts "\n"
       menu 
-        #list dates; method to search and find by date
     when "by neighborhood"
       list_neighborhoods
       display_parades_by_neighborhood 
@@ -65,7 +64,6 @@ class CLI
     end
   end
   
-  
   def parade_detail
     puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
@@ -74,10 +72,22 @@ class CLI
     puts "\n #{@parade_list[number_input - 1].history}"
   end
   
+  def display_by_date
+    puts "What date would you like to attend a parade? (range: Jan 06 - Mar 05)"
+    date_input = gets.strip
+    
+    puts "#{date_input}\n"
+    
+    date_list = Parade.all.find_all {|p| p.date == date_input}
+    
+    date_list.each_with_index do |parade, index|
+    puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
+    end 
+  end
+  
   def list_neighborhoods
     
     @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
-
     @neighborhood_list.each_with_index do |n, index|
       puts "#{index + 1}. #{n.name}"
     end 
