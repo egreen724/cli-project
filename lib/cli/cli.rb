@@ -37,6 +37,7 @@ class CLI
       menu 
     when "by date"
       display_by_date
+      parade_detail_by_date
       puts "\n"
       menu 
     when "by neighborhood"
@@ -78,15 +79,22 @@ class CLI
     
     puts "#{date_input}\n"
     
-    date_list = Parade.all.find_all {|p| p.date == date_input}
+    @date_list = Parade.all.find_all {|p| p.date == date_input}
     
-    date_list.each_with_index do |parade, index|
+    @date_list.each_with_index do |parade, index|
     puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
     end 
   end
   
-  def list_neighborhoods
+  def parade_detail_by_date
+    puts "\nEnter the parade number to see more details."
+    number_input = gets.strip.to_i 
     
+    puts "\n#{@date_list[number_input - 1].title}, #{@date_list[number_input - 1].date}, #{@date_list[number_input - 1].time}, #{@date_list[number_input - 1].neighborhood}"
+    puts "\n#{@date_list[number_input - 1].history}"
+  end
+  
+  def list_neighborhoods
     @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
     @neighborhood_list.each_with_index do |n, index|
       puts "#{index + 1}. #{n.name}"
@@ -105,8 +113,8 @@ class CLI
     
     parade_list.each_with_index do |parade, index|
      puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
-      end 
-    
+    end 
+  end 
     # current_neighborhood.parades.each_with_index do |parade, index|
     # puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
      # end 
@@ -123,6 +131,6 @@ class CLI
     # else 
     #   puts "Please enter an accurate name."
     #   end 
-    end
+  
 
 end
