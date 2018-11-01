@@ -83,7 +83,7 @@ class CLI
     end 
   end
   
-   def display_parades_by_neighborhood
+  def display_parades_by_neighborhood
     puts "Please enter the neighborhood number to see a list of parades."
     neighborhood_input = gets.strip.to_i   
     
@@ -91,9 +91,15 @@ class CLI
     
     puts "#{current_neighborhood.name}\n"
     
-    current_neighborhood.parades.each_with_index do |parade, index|
-    puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+    parade_list = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
+    
+    parade_list.each_with_index do |parade, index|
+     puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
       end 
+    
+    # current_neighborhood.parades.each_with_index do |parade, index|
+    # puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
+     # end 
     
     # if Neighborhood.find_by_name(neighborhood_input) == neighborhood_input 
     #   binding.pry 
