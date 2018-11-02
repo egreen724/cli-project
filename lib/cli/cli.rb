@@ -57,7 +57,8 @@ class CLI
   def exit_method 
     puts "Thank you for exploring the Mardi Gras Parade schedule for 2019! Laissez les bons temps rouler!"
   end 
-    
+  
+  
   def list_parades 
     @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
     
@@ -65,6 +66,7 @@ class CLI
       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.day}, #{parade.date} - #{parade.time}"
     end
   end
+  
   
   def parade_detail
     puts "\n Enter the parade number to see more details."

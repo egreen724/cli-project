@@ -1,8 +1,6 @@
 # Cli::Project
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cli/project`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This Ruby Gem provides a CLI to explore the Mardi Gras Parade Schedule for 2019 based on information from the Mardi Gras New Orleans website. 
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Install the Gem and follow the on screen prompts. 
 
 ## Development
 
