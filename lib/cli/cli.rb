@@ -85,7 +85,6 @@ class CLI
     date_input = gets.strip
     
     if Parade.all.any? {|p| p.date == date_input}
-      puts "#{date_input}\n"
       
       @date_list = Parade.all.find_all {|p| p.date == date_input}
       
@@ -125,7 +124,7 @@ class CLI
     if neighborhood_input <= (@neighborhood_list.length + 1)
       current_neighborhood = @neighborhood_list[neighborhood_input - 1]
       
-      #puts "#{current_neighborhood.name}\n"
+      puts "#{current_neighborhood.name}\n"
       
       @parade_list_by_n = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
       
