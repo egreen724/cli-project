@@ -36,6 +36,7 @@ class CLI
       puts "\n"
       menu 
     when "by date"
+      list_dates 
       display_by_date
       parade_detail_by_date
       puts "\n"
@@ -82,19 +83,33 @@ class CLI
    end 
   end
   
-  def display_by_date
-    puts "What date would you like to attend a parade? (range: Jan 06 - Mar 05)"
-    date_input = gets.strip
+  def list_dates 
     
-    if Parade.all.any? {|p| p.date == date_input}
+    @date_list = Parade.all.uniq {|p| p.date}
+    
+     @date_list.each_with_index do |parade, index|
+      puts "#{index + 1}. #{parade.day}, #{parade.date}"
+    end
+  end
+  
+  def display_by_date
+    puts "Enter the number above to see all parades on that date."
+    date_input = gets.strip.to_i
+    
+    #@date_list = Parade.all.uniq {|p| p.date}
+    
+    if date_input <= (@date_list.length + 1)
+      current_date = @date_list[date_input - 1]
       
-      @date_list = Parade.all.find_all {|p| p.date == date_input}
+       puts "#{current_date}\n"
       
-      @date_list.each_with_index do |parade, index|
-      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
-      end
+      parade_list_by_date = Parade.all.find_all {|parade| parade.date == current_date.date}
+      
+      parade_list_by_date.each_with_index do |parade, index|
+       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
+        end 
     else 
-      puts "Please enter a valid date in the following format: Mon DD (ex. Jan 06)\n"
+      puts "Please enter a valid number.\n"
       display_by_date
     end 
   end
