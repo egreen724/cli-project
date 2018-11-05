@@ -101,11 +101,11 @@ class CLI
     if date_input <= (@date_list.length + 1)
       current_date = @date_list[date_input - 1]
       
-       puts "#{current_date}\n"
+       puts "#{current_date.date}\n"
       
-      parade_list_by_date = Parade.all.find_all {|parade| parade.date == current_date.date}
+      @parade_list_by_date = Parade.all.find_all {|parade| parade.date == current_date.date}
       
-      parade_list_by_date.each_with_index do |parade, index|
+      @parade_list_by_date.each_with_index do |parade, index|
        puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
         end 
     else 
@@ -117,10 +117,11 @@ class CLI
   def parade_detail_by_date
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i 
+    current_parade = @parade_list_by_date[number_input - 1]
     
-    if number_input <= (@date_list.length + 1)
-      puts "\n#{@date_list[number_input - 1].title}, #{@date_list[number_input - 1].date}, #{@date_list[number_input - 1].time}, #{@date_list[number_input - 1].neighborhood}"
-      puts "#{@date_list[number_input - 1].history}"
+    if number_input <= (@parade_list_by_date.length + 1)
+      puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood}"
+      puts "#{current_parade.history}"
     else 
       puts "Please enter a valid number."
       parade_detail_by_date
@@ -129,16 +130,18 @@ class CLI
   
   def list_neighborhoods
     @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
+    
+   # if @neighborhood_list.each {|n| n.name != ""}
     @neighborhood_list.each_with_index do |n, index|
       puts "#{index + 1}. #{n.name}"
-    end 
+    end
   end
   
   def display_parades_by_neighborhood
     puts "Please enter the neighborhood number to see a list of parades."
     neighborhood_input = gets.strip.to_i   
     
-    if neighborhood_input <= (@neighborhood_list.length + 1)
+    if neighborhood_input <= (@neighborhood_list.length + 1) 
       current_neighborhood = @neighborhood_list[neighborhood_input - 1]
       
       puts "#{current_neighborhood.name}\n"
@@ -166,24 +169,5 @@ class CLI
       parade_detail_by_n
     end 
   end
-  
-  
-    # current_neighborhood.parades.each_with_index do |parade, index|
-    # puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
-     # end 
-    
-    # if Neighborhood.find_by_name(neighborhood_input) == neighborhood_input 
-    #   binding.pry 
-    #   current_neighborhood = Neighborhood.find_by_name(neighborhood_input)
-    #   neighborhood_list = current_neighborhood.parades.sort{|a, b| a.date <=> b.date}
-      
-    #   neighborhood_list.each_with_index do |parade, index|
-    #     puts "#{index + 1}. #{parade.title} - #{parade.day}, #{parade.date} - #{parade.time}"
-    #     binding.pry 
-    #   end 
-    # else 
-    #   puts "Please enter an accurate name."
-    #   end 
-  
 
 end
