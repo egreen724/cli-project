@@ -25,7 +25,7 @@ class CLI
   end
   
   def menu  
-    puts "Main Menu: \nWould you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
+    puts "\nMAIN MENU: \nWould you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
     
     input = gets.strip.to_s 
     
@@ -63,18 +63,18 @@ class CLI
   def list_parades 
     @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
     
+     puts "FULL SCHEDULE\n"
+     
     @parade_list.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.day}, #{parade.date} - #{parade.time}"
     end
   end
-  
-  
+
   def parade_detail
     puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
     
     if number_input <= (@parade_list.length + 1)
-    
       puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
       puts "#{@parade_list[number_input - 1].history}"
     else 
@@ -84,6 +84,7 @@ class CLI
   end
   
   def list_dates 
+    puts "\nALL DATES:"
     
     @date_list = Parade.all.uniq {|p| p.date}
     
@@ -129,16 +130,21 @@ class CLI
   end
   
   def list_neighborhoods
+    puts "\nALL NEIGHBORHOODS:"
+    
     @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
     
-   # if @neighborhood_list.each {|n| n.name != ""}
+    #unless @neighborhood_list.any? {|n| n.name == " "} 
+   
     @neighborhood_list.each_with_index do |n, index|
+      if n.name != ""
       puts "#{index + 1}. #{n.name}"
-    end
+    end 
+   end
   end
   
   def display_parades_by_neighborhood
-    puts "Please enter the neighborhood number to see a list of parades."
+    puts "Please enter the neighborhood number to see a list of parades in that area."
     neighborhood_input = gets.strip.to_i   
     
     if neighborhood_input <= (@neighborhood_list.length + 1) 
