@@ -145,11 +145,11 @@ class CLI
     neighborhood_input = gets.strip.to_i   
     
     if neighborhood_input <= (Neighborhood.all.length + 1)
-       current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
+       @current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
     
-      puts "#{current_neighborhood.name}\n"
+      puts "#{@current_neighborhood.name}\n"
       
-      current_neighborhood.parades.each_with_index do |parade, index|
+      @current_neighborhood.parades.each_with_index do |parade, index|
        puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
         end 
     else 
@@ -162,9 +162,11 @@ class CLI
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i
     
+    current_parade = @current_neighborhood.parades[number_input - 1] 
+    
     if number_input <= (Neighborhood.all.length + 1)
-      puts "\n#{Neighborhood.all[number_input - 1].title}, #{Neighborhood.all[number_input - 1].date}, #{Neighborhood.all[number_input - 1].time}, #{Neighborhood.all[number_input - 1].neighborhood.name}"
-      puts "\n#{@parade_list_by_n[number_input - 1].history}"
+      puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
+      puts "#{current_parade.history}"
     else
       puts "Please enter a valid number."
       parade_detail_by_n
