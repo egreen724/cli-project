@@ -19,19 +19,12 @@ class Parade
     @@all 
   end
   
+  def self.sorted 
+    self.all.sort{|a, b| a.date <=> b.date}
+  end 
+  
    def self.find_by_title(title)
     self.all.find {|x| x.title == title}
   end
-  
-  # def neighborhood=(neighborhood)
-  #   @neighborhood = neighborhood 
-    
-  #   if Neighborhood.all.include?(neighborhood)
-  #   neighborhood.add_parade(self)
-  #   else 
-  #     new_neighborhood = Neighborhood.new(neighborhood)
-  #     new_neighborhood.parades << self 
-  #   end 
-  # end
   
 end

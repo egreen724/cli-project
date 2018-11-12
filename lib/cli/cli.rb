@@ -61,11 +61,10 @@ class CLI
   
   
   def list_parades 
-    @parade_list = Parade.all.sort{|a, b| a.date <=> b.date} 
-    
+  
      puts "FULL SCHEDULE\n"
      
-    @parade_list.each_with_index do |parade, index|
+    Parade.sorted.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood.name} - #{parade.day}, #{parade.date} - #{parade.time}"
     end
   end
@@ -74,9 +73,11 @@ class CLI
     puts "\n Enter the parade number to see more details."
     number_input = gets.strip.to_i 
     
-    if number_input <= (@parade_list.length + 1)
-      puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood.name}"
-      puts "#{@parade_list[number_input - 1].history}"
+    if number_input <= (Parade.all.length + 1) && number_input > 0 
+      current_parade = Parade.sorted[number_input - 1]
+      
+      puts "#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
+      puts "#{current_parade.history}"
     else 
      puts "Please enter a valid number."
      parade_detail
