@@ -86,7 +86,7 @@ class CLI
   def list_dates 
     puts "\nALL DATES:"
     
-    @date_list = Parade.all.uniq {|p| p.date}
+     @date_list = Parade.all.uniq {|p| p.date}
     
      @date_list.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.day}, #{parade.date}"
