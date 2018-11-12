@@ -97,7 +97,6 @@ class CLI
     puts "Enter the number above to see all parades on that date."
     date_input = gets.strip.to_i
     
-    #@date_list = Parade.all.uniq {|p| p.date}
     
     if date_input <= (@date_list.length + 1)
       current_date = @date_list[date_input - 1]
@@ -133,8 +132,6 @@ class CLI
     puts "\nALL NEIGHBORHOODS:"
     
     @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
-    
-    #unless @neighborhood_list.any? {|n| n.name == " "} 
    
     @neighborhood_list.each_with_index do |n, index|
       if n.name != ""
