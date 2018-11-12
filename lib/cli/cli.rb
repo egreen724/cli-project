@@ -66,7 +66,7 @@ class CLI
      puts "FULL SCHEDULE\n"
      
     @parade_list.each_with_index do |parade, index|
-      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.day}, #{parade.date} - #{parade.time}"
+      puts "#{index + 1}. #{parade.title} - #{parade.neighborhood.name} - #{parade.day}, #{parade.date} - #{parade.time}"
     end
   end
 
@@ -75,7 +75,7 @@ class CLI
     number_input = gets.strip.to_i 
     
     if number_input <= (@parade_list.length + 1)
-      puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood}"
+      puts "#{@parade_list[number_input - 1].title}, #{@parade_list[number_input - 1].date}, #{@parade_list[number_input - 1].time}, #{@parade_list[number_input - 1].neighborhood.name}"
       puts "#{@parade_list[number_input - 1].history}"
     else 
      puts "Please enter a valid number."
@@ -106,7 +106,7 @@ class CLI
       @parade_list_by_date = Parade.all.find_all {|parade| parade.date == current_date.date}
       
       @parade_list_by_date.each_with_index do |parade, index|
-       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood} - #{parade.time}"
+       puts "#{index + 1}. #{parade.title} - #{parade.neighborhood.name} - #{parade.time}"
         end 
     else 
       puts "Please enter a valid number.\n"
@@ -120,7 +120,7 @@ class CLI
     current_parade = @parade_list_by_date[number_input - 1]
     
     if number_input <= (@parade_list_by_date.length + 1)
-      puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood}"
+      puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
       puts "#{current_parade.history}"
     else 
       puts "Please enter a valid number."
@@ -165,7 +165,7 @@ class CLI
     number_input = gets.strip.to_i
     
     if number_input <= (@parade_list_by_n.length + 1)
-      puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood}"
+      puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood.name}"
       puts "\n#{@parade_list_by_n[number_input - 1].history}"
     else
       puts "Please enter a valid number."
