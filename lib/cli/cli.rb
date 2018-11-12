@@ -99,7 +99,7 @@ class CLI
     date_input = gets.strip.to_i
     
     
-    if date_input <= (@date_list.length + 1)
+    if date_input <= (@date_list.length + 1) && date_input > 0
       current_date = @date_list[date_input - 1]
       
        puts "#{current_date.date}\n"
@@ -120,7 +120,7 @@ class CLI
     number_input = gets.strip.to_i 
     current_parade = @parade_list_by_date[number_input - 1]
     
-    if number_input <= (@parade_list_by_date.length + 1)
+    if number_input <= (@parade_list_by_date.length + 1) && number_input > 0 
       puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
       puts "#{current_parade.history}"
     else 
@@ -145,9 +145,10 @@ class CLI
     puts "Please enter the neighborhood number to see a list of parades in that area."
     neighborhood_input = gets.strip.to_i   
     
-    if neighborhood_input <= (Neighborhood.all.length + 1)
-       @current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
+    @current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
     
+    if neighborhood_input <= (@current_neighborhood.parades.length + 1) && neighborhood_input > 0
+
       puts "#{@current_neighborhood.name}\n"
       
       @current_neighborhood.parades.each_with_index do |parade, index|
@@ -165,7 +166,7 @@ class CLI
     
     current_parade = @current_neighborhood.parades[number_input - 1] 
     
-    if number_input <= (Neighborhood.all.length + 1)
+    if number_input <= (@current_neighborhood.parades.length + 1) && number_input > 0 
       puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
       puts "#{current_parade.history}"
     else
