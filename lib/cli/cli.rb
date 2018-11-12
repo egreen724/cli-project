@@ -162,8 +162,8 @@ class CLI
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i
     
-    if number_input <= (@parade_list_by_n.length + 1)
-      puts "\n#{@parade_list_by_n[number_input - 1].title}, #{@parade_list_by_n[number_input - 1].date}, #{@parade_list_by_n[number_input - 1].time}, #{@parade_list_by_n[number_input - 1].neighborhood.name}"
+    if number_input <= (Neighborhood.all.length + 1)
+      puts "\n#{Neighborhood.all[number_input - 1].title}, #{Neighborhood.all[number_input - 1].date}, #{Neighborhood.all[number_input - 1].time}, #{Neighborhood.all[number_input - 1].neighborhood.name}"
       puts "\n#{@parade_list_by_n[number_input - 1].history}"
     else
       puts "Please enter a valid number."
