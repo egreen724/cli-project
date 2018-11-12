@@ -25,23 +25,23 @@ class CLI
   end
   
   def menu  
-    puts "\nMAIN MENU: \nWould you like to: see the full parade schedule (enter “full schedule”), see the parades by date (enter “by date”), or see the parades by neighborhood (enter “by neighborhood”)? To exit, type exit."
+    puts "\nMAIN MENU: \nWould you like to: 1). see the full parade schedule (enter “1”), 2). see the parades by date (enter “2”), or 3). see the parades by neighborhood (enter “3”)? To exit, type exit."
     
-    input = gets.strip.to_s 
+    input = gets.strip
     
     case input 
-    when "full schedule"
+    when "1"
       list_parades
       parade_detail
       puts "\n"
       menu 
-    when "by date"
+    when "2"
       list_dates 
       display_by_date
       parade_detail_by_date
       puts "\n"
       menu 
-    when "by neighborhood"
+    when "3"
       list_neighborhoods
       display_parades_by_neighborhood 
       parade_detail_by_n
