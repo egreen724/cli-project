@@ -1,5 +1,3 @@
-require 'pry'
-
 class Neighborhood
   
   attr_accessor :name, :parades 

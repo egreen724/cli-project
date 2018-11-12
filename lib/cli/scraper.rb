@@ -1,8 +1,3 @@
-require 'open-uri'
-require 'pry'
-require 'nokogiri'
-require 'date'
-
 #Scraping data from http://www.mardigrasneworleans.com/schedule.html
 
 class Scraper
