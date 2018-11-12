@@ -39,12 +39,15 @@ class Scraper
       neighborhood = parade.css("div.purpleBar span[@itemprop = 'name']").text
       
         if Neighborhood.find_by_name(neighborhood)
-          current_parade.neighborhood = Neighborhood.find_by_name(neighborhood)
+          existing_neighborhood = Neighborhood.find_by_name(neighborhood)
+          current_parade.neighborhood = existing_neighborhood
+          existing_neighborhood.parades << current_parade
         else 
-          current_parade.neighborhood = Neighborhood.new(neighborhood)
+          new_neighborhood = Neighborhood.new(neighborhood)
+          current_parade.neighborhood = new_neighborhood
+          new_neighborhood.parades << current_parade
         end 
-        Neighborhood.parades << current_parade
-        binding.pry 
+
       #parade.css("div.purpleBar time").attribute("datetime").value provides datetime datapoint  
     end
     
