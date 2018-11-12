@@ -131,9 +131,9 @@ class CLI
   def list_neighborhoods
     puts "\nALL NEIGHBORHOODS:"
     
-    @neighborhood_list = Neighborhood.all.uniq {|n| n.name}
+    #@neighborhood_list = Neighborhood.all.uniq {|n| n.name}
    
-    @neighborhood_list.each_with_index do |n, index|
+    Neighborhood.all.each_with_index do |n, index|
       if n.name != ""
       puts "#{index + 1}. #{n.name}"
     end 
@@ -144,14 +144,12 @@ class CLI
     puts "Please enter the neighborhood number to see a list of parades in that area."
     neighborhood_input = gets.strip.to_i   
     
-    if neighborhood_input <= (@neighborhood_list.length + 1) 
-      current_neighborhood = @neighborhood_list[neighborhood_input - 1]
-      
+    if neighborhood_input <= (Neighborhood.all.length + 1)
+       current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
+    
       puts "#{current_neighborhood.name}\n"
       
-      @parade_list_by_n = Parade.all.find_all {|parade| parade.neighborhood == current_neighborhood.name}
-      
-      @parade_list_by_n.each_with_index do |parade, index|
+      current_neighborhood.parades.each_with_index do |parade, index|
        puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
         end 
     else 
