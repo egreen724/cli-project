@@ -87,9 +87,7 @@ class CLI
   def list_dates 
     puts "\nALL DATES:"
     
-     @date_list = Parade.all.uniq {|p| p.date}
-    
-     @date_list.each_with_index do |parade, index|
+    Parade.parade_dates.each_with_index do |parade, index|
       puts "#{index + 1}. #{parade.day}, #{parade.date}"
     end
   end
@@ -99,8 +97,8 @@ class CLI
     date_input = gets.strip.to_i
     
     
-    if date_input <= (@date_list.length) && date_input > 0
-      current_date = @date_list[date_input - 1]
+    if date_input <= (Parade.parade_dates.length) && date_input > 0
+      current_date = Parade.parade_dates[date_input - 1]
       
        puts "#{current_date.date}\n"
       

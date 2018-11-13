@@ -27,4 +27,7 @@ class Parade
     self.all.find {|x| x.title == title}
   end
   
+  def self.parade_dates 
+    self.all.uniq {|p| p.date}
+  end 
 end
