@@ -7,7 +7,6 @@ class Scraper
   def scrape_schedule_page(url)
     schedule = Nokogiri::HTML(open(url))
     
-    neighborhoods = []
     parades = []
     
     schedule.css("ul.parades").each do |block|
