@@ -44,7 +44,7 @@ class CLI
     when "3"
       list_neighborhoods
       display_parades_by_neighborhood 
-      parade_detail_by_n
+      #parade_detail_by_n
       puts "\n"
       menu 
     when "exit"
@@ -96,15 +96,12 @@ class CLI
     puts "Enter the number above to see all parades on that date."
     date_input = gets.strip.to_i
     
-    
     if date_input <= (Parade.parade_dates.length) && date_input > 0
       current_date = Parade.parade_dates[date_input - 1]
       
        puts "#{current_date.date}\n"
-      
-      @parade_list_by_date = Parade.all.find_all {|parade| parade.date == current_date.date}
-      
-      @parade_list_by_date.each_with_index do |parade, index|
+     
+      Parade.find_by_date(current_date).each_with_index do |parade, index|
        puts "#{index + 1}. #{parade.title} - #{parade.neighborhood.name} - #{parade.time}"
         end 
     else 
@@ -116,9 +113,9 @@ class CLI
   def parade_detail_by_date
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i 
-    current_parade = @parade_list_by_date[number_input - 1]
+    current_parade = Parade.find_by_date(current_date)[number_input - 1]
     
-    if number_input <= (@parade_list_by_date.length) && number_input > 0 
+    if number_input <= (Parade.find_by_date(current_date).length) && number_input > 0 
       puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
       puts "#{current_parade.history}"
     else 
@@ -143,27 +140,28 @@ class CLI
     puts "Please enter the neighborhood number to see a list of parades in that area."
     neighborhood_input = gets.strip.to_i   
     
-    @current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
+    current_neighborhood = Neighborhood.all[neighborhood_input - 1] 
     
-    if neighborhood_input <= @current_neighborhood.parades.length && neighborhood_input > 0
-      puts "#{@current_neighborhood.name}\n"
+    if neighborhood_input <= current_neighborhood.parades.length && neighborhood_input > 0
+      puts "#{current_neighborhood.name}\n"
       
-      @current_neighborhood.parades.each_with_index do |parade, index|
+      current_neighborhood.parades.each_with_index do |parade, index|
        puts "#{index + 1}. #{parade.title} - #{parade.date} - #{parade.time}"
         end 
     else 
       puts "Please enter a valid number."
       display_parades_by_neighborhood
     end 
+    parade_detail_by_n(current_neighborhood)
   end 
   
-  def parade_detail_by_n
+  def parade_detail_by_n(current_neighborhood)
     puts "\nEnter the parade number to see more details."
     number_input = gets.strip.to_i
     
-    current_parade = @current_neighborhood.parades[number_input - 1] 
+    current_parade = current_neighborhood.parades[number_input - 1] 
     
-    if number_input <= (@current_neighborhood.parades.length) && number_input > 0 
+    if number_input <= (current_neighborhood.parades.length) && number_input > 0 
       puts "\n#{current_parade.title}, #{current_parade.date}, #{current_parade.time}, #{current_parade.neighborhood.name}"
        
       puts "#{current_parade.history}"

@@ -30,4 +30,8 @@ class Parade
   def self.parade_dates 
     self.all.uniq {|p| p.date}
   end 
+  
+  def self.find_by_date(current_date)
+    self.all.find_all {|parade| parade.date == current_date.date}
+  end
 end
